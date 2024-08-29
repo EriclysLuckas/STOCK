@@ -1,0 +1,87 @@
+.formcarryContainer {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+form {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+}
+
+.formCarryBlock1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  margin-bottom: 2%;
+  
+}
+.boxinput{
+  flex: 1 1 20%; 
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  
+}
+
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  resize: none;
+
+}
+
+
+
+input[type="text"],
+input[type="number"],
+select{
+  height: 6ch;
+  
+}
+
+textarea {
+  resize: none;
+}
+.formCarryBlock{
+  position: absolute;
+  right: 6%;
+  margin-top: 2%;
+}
+
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+.formCarryBlock2{
+  height: 5rem;
+  margin-bottom: 1ch;
+}
+.formCarryBlock2 textarea{
+height: 100%;
+}

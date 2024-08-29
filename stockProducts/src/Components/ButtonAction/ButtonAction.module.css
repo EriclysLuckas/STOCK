@@ -1,0 +1,36 @@
+
+
+
+.btnProducts, .btnProducts{
+  background-color: red;
+
+  &:before{
+    width: 101%;
+    height: 0;
+    
+}
+
+&:hover{
+    color: black;
+    transition: .7s ease;
+    &:before{
+        height: 99%;
+        border: 20ch solid rgb(41, 156, 233);
+
+    }
+}
+}
+.btnAction{
+
+  display: flex;
+  justify-content: center;
+}
+.trash{
+  background: #cf0000;
+}
+.edit{
+  background-color: #046f5d;
+}
+.view{
+  background:  rgb(0, 101, 252);
+}

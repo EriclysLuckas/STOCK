@@ -1,0 +1,62 @@
+
+.MenuItensGeneralScreen{
+    display: flex;
+    border-bottom:.1ch  solid rgba(58, 57, 57, 0.61) ;
+    width: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    margin-top: 2%;
+  }
+  .MenuItensGeneralScreen p {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+  
+    &:before{
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 1%;
+        transition: .5s ease;
+        background-color: rgb(43, 118, 231);
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+  
+    &:hover{
+        &::before{
+          box-shadow: -5px 5px 10px 0px rgb(0, 101, 252);
+  
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 1%;
+        }
+    }
+  }
+  .active{
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    cursor: pointer;
+    &:before{
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 1%;
+      background-color: rgb(43, 118, 231);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      bottom: 0%;
+      
+  }
+
+
+  }
+
+
+.linkGeneral{
+  padding-bottom: 10% ;
+  width: 15ch;
+}

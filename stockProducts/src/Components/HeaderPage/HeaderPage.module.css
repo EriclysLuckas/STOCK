@@ -1,0 +1,61 @@
+.compHeader{
+  width: 100%;
+  margin-bottom: 2%;
+
+}
+.ContentHeader {
+  position: relative;
+  border-bottom:.1ch  solid rgba(58, 57, 57, 0.61) ;
+  display: flex;
+  align-items: center;  
+}
+.TitleHeader{
+  color: rgb(0, 101, 252);
+  &:hover{
+    cursor: pointer;
+  }
+}
+.navHeader{
+  position: absolute;
+  right: 4%;
+  gap: 10%;
+  display: flex;
+  
+  
+}
+.navHeader p {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  cursor: pointer;
+
+
+  &:before{
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 1%;
+      transition: .5s ease;
+      background-color: rgb(43, 118, 231);
+      transform: translate(-50%, -50%);
+      left: 50%;
+
+
+  }
+
+  &:hover{
+      &::before{
+        box-shadow: -5px 5px 10px 0px rgb(0, 101, 252);
+
+          position: absolute;
+          content: '';
+          width: 100%;
+          height: 1%;
+      }
+  }
+}
+
+p a{
+  text-decoration: none;
+  color: white;
+}
