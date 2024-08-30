@@ -3,68 +3,86 @@ import { useState, useEffect } from "react";
 export default function useUtils() {
   const [base, setBase] = useState([]);
 
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/products");
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://stock-smoky.vercel.app/api/products");
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
       const jsonProducts = await response.json();
-
       setBase(jsonProducts);
-    };
-    
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
-
   const addProduct = async (newProducts) => {
-    
-
-    await  fetch("http://localhost:3000/products",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body:JSON.stringify(newProducts),
-    })
-   
-    fetchData()
-  }
-
-
+    try {
+      const response = await fetch("https://stock-smoky.vercel.app/api/products", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newProducts),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to add product');
+      }
+      await fetchData();
+    } catch (error) {
+      console.error("Error adding product:", error);
+    }
+  };
 
   const deleteProducts = async (id) => {
-
-    await fetch(`http://localhost:3000/products/${id}`, {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"}
-    })
-    fetchData()
-  }
-
-
-  
-
-  const getProductId=  async (id) => {
-
-    const response = await fetch(`http://localhost:3000/products/${id}`)
-    const products = await response.json()
-
-    
-    return products
+    try {
+      const response = await fetch(`https://stock-smoky.vercel.app/api/products?id=${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete product');
+      }
+      await fetchData();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
+  const getProductId = async (id) => {
+    try {
+      const response = await fetch(`https://stock-smoky.vercel.app/api/products/${id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch product');
+      }
+      const product = await response.json();
+      return product;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error);
+    }
+  };
 
-  // Função para atualizar um produto
   const updateProduct = async (id, updatedProduct) => {
-    await fetch(`http://localhost:3000/products/${id}`, {
-      method: "PATCH", 
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(updatedProduct),
-    });
-    fetchData(); // Atualiza a lista de produtos após a atualização
+    try {
+      const response = await fetch(`https://stock-smoky.vercel.app/api/products?id=${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedProduct),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update product');
+      }
+      await fetchData();
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
   };
 
- return {base, addProduct, deleteProducts, getProductId, updateProduct }
+  return { base, addProduct, deleteProducts, getProductId, updateProduct };
 }
-
