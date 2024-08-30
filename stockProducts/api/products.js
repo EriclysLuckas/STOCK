@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 /* eslint-disable */
 
-const dbPath = path.join(process.cwd(), '../src/Data/db.json');
+const dbPath = path.join(process.cwd(), '/db.json');
 
 const readDB = () => {
   const data = fs.readFileSync(dbPath, 'utf-8');

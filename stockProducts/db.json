@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": "aa57",
+      "name": "SDHDFHS2asfa",
+      "quantity": 422,
+      "price": 12,
+      "category": "Categoria1",
+      "desc": "SFSSDVS",
+      "date": "2024-08-29 | 21:59"
+    },
+    {
+      "id": "c2a1",
+      "name": "ASFA",
+      "quantity": 3,
+      "price": 12.2,
+      "category": "Categoria3",
+      "desc": "ASFAS",
+      "date": "2024-08-29 | 10:53"
+    },
+    {
+      "id": "575d",
+      "name": "teste 23",
+      "quantity": 2121,
+      "price": 24,
+      "category": "Categoria2",
+      "desc": "asfasfgasfasfasfa",
+      "date": "2024-08-29 | 10:58"
+    },
+    {
+      "id": "4cee",
+      "name": "Teste 23",
+      "quantity": 123,
+      "price": 321,
+      "category": "Categoria3",
+      "desc": "asafafa",
+      "date": "2024-08-29 | 13:31"
+    }
+  ]
+}
