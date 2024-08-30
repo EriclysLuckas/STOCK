@@ -4,7 +4,7 @@ export default function useUtils() {
   const [base, setBase] = useState([]);
 
     const fetchData = async () => {
-      const response = await fetch("https://stock-blue.vercel.app/products");
+      const response = await fetch("http://localhost:3000/products");
       const jsonProducts = await response.json();
 
       setBase(jsonProducts);
@@ -18,7 +18,7 @@ export default function useUtils() {
   const addProduct = async (newProducts) => {
     
 
-    await  fetch("https://stock-blue.vercel.app/products",{
+    await  fetch("http://localhost:3000/products",{
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -33,7 +33,7 @@ export default function useUtils() {
 
   const deleteProducts = async (id) => {
 
-    await fetch(`https://stock-blue.vercel.app/products/${id}`, {
+    await fetch(`http://localhost:3000/products/${id}`, {
       method: "DELETE",
       headers: {"Content-Type": "application/json"}
     })
@@ -45,7 +45,7 @@ export default function useUtils() {
 
   const getProductId=  async (id) => {
 
-    const response = await fetch(`https://stock-blue.vercel.app/products/${id}`)
+    const response = await fetch(`http://localhost:3000/products/${id}`)
     const products = await response.json()
 
     
@@ -55,7 +55,7 @@ export default function useUtils() {
 
   // Função para atualizar um produto
   const updateProduct = async (id, updatedProduct) => {
-    await fetch(`https://stock-blue.vercel.app/products/${id}`, {
+    await fetch(`http://localhost:3000/products/${id}`, {
       method: "PATCH", 
       headers: {
         "Content-Type": "application/json"
