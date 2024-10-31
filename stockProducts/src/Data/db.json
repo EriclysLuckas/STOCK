@@ -1,22 +1,13 @@
 {
   "products": [
     {
-      "id": "575d",
-      "name": "teste 23",
-      "quantity": 2121,
-      "price": 24,
-      "category": "Categoria2",
-      "desc": "asfasfgasfasfasfa",
-      "date": "2024-10-31 | 14:58"
-    },
-    {
       "id": "63b6",
       "name": "teste 2 ",
       "quantity": 123,
       "price": 2123,
-      "category": "Categoria2",
+      "category": "Categoria1",
       "desc": "asdasdasd",
-      "date": "2024-10-31 | 14:04"
+      "date": "2024-10-31 | 15:42"
     },
     {
       "id": "90b4",
