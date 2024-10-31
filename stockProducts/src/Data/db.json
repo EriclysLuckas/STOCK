@@ -1,6 +1,15 @@
 {
   "products": [
     {
+      "id": "b4c2",
+      "name": "awfasas",
+      "quantity": 211,
+      "price": 2321,
+      "category": "Categoria2",
+      "desc": "asfcsafds",
+      "date": "2024-08-29 | 11:02"
+    },
+    {
       "id": "aa57",
       "name": "SDHDFHS",
       "quantity": 4,
