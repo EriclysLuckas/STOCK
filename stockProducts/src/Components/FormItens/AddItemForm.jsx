@@ -1,6 +1,6 @@
 import style from "./AddItemForm.module.css";
 import useBaseContext from "../../hooks/userBaseContext";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddItemForm() {
@@ -34,26 +34,24 @@ const formattedDate = formatDate(currentDate);
   const buttonFormText = id ? "Atualizar" : "Salvar"
 
 
-    // Se um ID for fornecido, busca os dados do produto e preenche o formulário
-    if (id) {
-
-      const fetchProduct = async () => {
-          const productsForGet = await getProductId(id); // Busca o produto pelo ID
-          if (productsForGet) {
-            setFormData({
-              name: productsForGet.name || "",
-              quantity: productsForGet.quantity || "",
-              price: productsForGet.price || "",
-              category: productsForGet.category || "",
-              desc: productsForGet.desc || "",
-              date: productsForGet.date || formattedDate,
-            });
-          }
-
-      };
-      fetchProduct();
-
-    } 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (id) {
+        const productsForGet = await getProductId(id); // Busca o produto pelo ID
+        if (productsForGet) {
+          setFormData({
+            name: productsForGet.name || "",
+            quantity: productsForGet.quantity || "",
+            price: productsForGet.price || "",
+            category: productsForGet.category || "",
+            desc: productsForGet.desc || "",
+            date: productsForGet.date || formattedDate,
+          });
+        }
+      }
+    };
+    fetchProduct();
+  }, [id, getProductId, formattedDate]); // Adicionando dependências
 
  
   
