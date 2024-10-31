@@ -3,66 +3,6 @@
   
 }
 
-
-tbody tr td button{
-  border-radius: 10%;
-  width: 6ch;
-  height: 80%;
-  color:white;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  
-  background:  rgb(0, 101, 252);
-&:hover{
-  box-shadow: -1px 5px 15px 0px rgba(0, 101, 252, 0.788);
-  transition: .7s;
-}
-
-&::before{
-  border-radius: 10%;
-
-  content: '';
-  background: white;
-  width: 101%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  transition: .7s ease;
-  border: none;
-
-  }
-}
-.btnProducts, .btnProducts{
-
-  &:before{
-    width: 101%;
-    height: 0;
-    
-}
-
-&:hover{
-    color: black;
-    transition: .7s ease;
-    &:before{
-        height: 99%;
-        border: 20ch solid rgb(41, 156, 233);
-
-    }
-}
-}
-.btnAction{
-
-  display: flex;
-  justify-content: center;
-}
-
-
 .name{
   width: 30%;
 }

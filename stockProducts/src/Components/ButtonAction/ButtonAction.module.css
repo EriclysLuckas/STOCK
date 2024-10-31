@@ -1,8 +1,35 @@
+ .btnProducts {
+  border-radius: 10%;
+  color:white;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background:  rgb(0, 101, 252);
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 
+&::before{
+  border-radius: 10%;
 
+  content: '';
+  background: white;
+  width: 101%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  transition: .7s ease;
+  border: none;
 
-.btnProducts, .btnProducts{
-  background-color: red;
+  }
+}
+.btnProducts{
 
   &:before{
     width: 101%;
@@ -20,6 +47,8 @@
     }
 }
 }
+
+
 .btnAction{
 
   display: flex;
@@ -27,10 +56,22 @@
 }
 .trash{
   background: #cf0000;
+  &:hover{
+    box-shadow: -1px 5px 15px 0px #cf0000; 
+
+  }
 }
 .edit{
   background-color: #046f5d;
+  &:hover{
+    box-shadow: -1px 5px 15px 0px #046f5d; 
+
+  }
 }
 .view{
   background:  rgb(0, 101, 252);
+ &:hover{
+    box-shadow: -1px 5px 15px 0px rgb(0, 101, 252); 
+
+  }
 }

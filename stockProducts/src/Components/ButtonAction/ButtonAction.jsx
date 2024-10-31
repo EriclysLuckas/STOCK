@@ -2,12 +2,14 @@ import btnStyle from "../ButtonAction/ButtonAction.module.css";
 import { FaTrashAlt, FaPencilAlt, FaEye } from "react-icons/fa";
 import useBaseContext from "../../hooks/userBaseContext";
 import PropTypes from 'prop-types'; 
-import { useNavigate } from "react-router-dom";
+import {  useState } from "react";
+import { useNavigate} from "react-router-dom";
+import  ModalDelet  from '../ModalDelet/ModalDelet';
 
-export const ButtonAction = ({ type, productId }) => {
+export const ButtonAction = ({ type, productId, productName}) => {
   const { deleteProducts, } = useBaseContext();
 
-
+const [modalOpen,setModal] = useState(false)
    const navigate = useNavigate();
 
 
@@ -15,8 +17,9 @@ export const ButtonAction = ({ type, productId }) => {
   const handleAction = () => {
 
     if (type === 'delete') {
-      deleteProducts(productId);
-      navigate(`/produtos`); 
+      setModal(true)
+      // deleteProducts(productId);
+      // navigate(`/produtos`); 
 
     } else if (type === 'update') {
 
@@ -27,7 +30,20 @@ export const ButtonAction = ({ type, productId }) => {
         navigate(`/produtos/${productId}`); 
      }
   }
-  return (
+
+
+
+  const handleConfirmeDeleteModal = async () => {
+    await deleteProducts(productId);
+    setModal(false)
+    navigate(`/produtos`); 
+
+  }
+  const handleCloseModal = () => {
+    setModal(false); // Fecha o modal
+  };
+
+  return (<>
     <button className={`${btnStyle.btnProducts} ${type === 'delete' ? btnStyle.trash : type === 'update' ? btnStyle.edit : type === 'view' ? btnStyle.view : null}`} onClick={handleAction}>
       {
         type === 'delete' ? <FaTrashAlt /> :
@@ -36,11 +52,20 @@ export const ButtonAction = ({ type, productId }) => {
               null
       }
     </button>
+    <ModalDelet 
+    isOpenModal={modalOpen}
+    onCloseModal={handleCloseModal}
+    onConfirmDelete={handleConfirmeDeleteModal}
+    productId={productId}
+    productName = {productName}
+    />
+    </>
   );
 };
 
 ButtonAction.propTypes = {
   type: PropTypes.oneOf(['delete', 'update', 'view']).isRequired,
   productId: PropTypes.string.isRequired,
+  productName: PropTypes.string.isRequired
 
 };

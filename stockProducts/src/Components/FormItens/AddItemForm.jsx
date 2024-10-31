@@ -171,7 +171,7 @@ if (id) {
           ></textarea>
         </div>
         <div className={style.formCarryBlock}>
-          <button type="submit">{buttonFormText}</button>
+          <button type="submit"  className={style.btnFormCarryBlock}>{buttonFormText}</button>
         </div>
       </form>
     </section>

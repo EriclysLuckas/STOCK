@@ -61,6 +61,7 @@ textarea {
   position: absolute;
   right: 6%;
   margin-top: 2%;
+  
 }
 
 button {
@@ -73,9 +74,6 @@ button {
   font-size: 16px;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
 
 
 .formCarryBlock2{

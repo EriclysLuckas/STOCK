@@ -28,7 +28,7 @@ export default function TableGeneralItens() {
               {/* <button className={style.btnProducts} onClick = {()=> handleView(products.id)}><FaEye /></button> */}
               <ButtonAction type="view" productId={products.id} />
               <ButtonAction type="update" productId={products.id} />
-              <ButtonAction type="delete" productId={products.id} />
+              <ButtonAction type="delete" productId={products.id} productName ={products.name} />
             </td>
           </tr>
         ))}
