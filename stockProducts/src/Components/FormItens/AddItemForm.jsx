@@ -19,6 +19,9 @@ export default function AddItemForm() {
 };
 const currentDate = new Date();
 const formattedDate = formatDate(currentDate);
+
+
+
   // Estado para armazenar dados do formulário
   const [formData, setFormData] = useState({
     name: "",
