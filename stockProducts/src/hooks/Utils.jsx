@@ -56,7 +56,7 @@ export default function useUtils() {
   // Função para atualizar um produto
   const updateProduct = async (id, updatedProduct) => {
     await fetch(`https://6723d042493fac3cf24c5624.mockapi.io/products/${id}`, {
-      method: "PATCH", 
+      method: "PUT", 
       headers: {
         "Content-Type": "application/json"
       },
