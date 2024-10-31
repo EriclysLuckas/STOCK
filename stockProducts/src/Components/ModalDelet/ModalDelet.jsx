@@ -17,7 +17,7 @@ export default function ModalDelet({ isOpenModal, onCloseModal, productName, onC
         <span className={styleModal.spanModal}>Deseja realmente excluir o produto {productName} ?</span>
 
         <div className={styleModal.contentButtom}>
-          <button className={styleModal.btnProductsModal}>Cancelar</button>
+          <button className={styleModal.btnProductsModal}onClick={onCloseModal}>Cancelar</button>
           <button className={styleModal.btnProductsModal} onClick={onConfirmDelete}>Confirmar</button>
 
         </div>
