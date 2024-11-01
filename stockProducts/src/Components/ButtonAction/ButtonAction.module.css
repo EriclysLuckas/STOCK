@@ -58,14 +58,20 @@
   background: #cf0000;
   &:hover{
     box-shadow: -1px 5px 15px 0px #cf0000; 
+    &:before{
+      border: 20ch solid #cf0000;
 
+  }
   }
 }
 .edit{
   background-color: #046f5d;
   &:hover{
     box-shadow: -1px 5px 15px 0px #046f5d; 
+    &:before{
+      border: 20ch solid #046f5d;
 
+    }
   }
 }
 .view{
