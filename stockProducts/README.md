@@ -2,6 +2,11 @@
 
 Este é um sistema simples de controle de estoque desenvolvido com **React** para a interface de usuário e **JSON Server** como banco de dados local em formato JSON. O sistema permite realizar operações básicas como cadastrar, editar, excluir e visualizar produtos no estoque.
 
+
+##  DEPLOY VERCEL 
+
+https://stock-smoky.vercel.app/
+
 ## Funcionalidades
 
 - Cadastro de novos produtos no estoque.
