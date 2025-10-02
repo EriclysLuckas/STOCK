@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "module": "^1.2.5",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.18.2",
+    "mongose": "^0.0.2-security",
+    "nodemon": "^3.1.10"
+  },
+  "name": "modelmongodb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
