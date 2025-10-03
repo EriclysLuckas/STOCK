@@ -1,110 +1,84 @@
-📦 Stock Products
-🔗 Deploy
+# Stock Products
 
-Frontend (Vercel): https://stock-smoky.vercel.app
+## 🔗 Acesse
+- **Versão em produção (Frontend):** [stock-smoky.vercel.app](https://stock-smoky.vercel.app)
+- **API Backend:** Hospedada no Render com Node.js, Express e MongoDB
 
-Backend (Render): https://stock-backend.onrender.com
+---
 
-🧩 Sobre o projeto
+## 🧩 Sobre o projeto
+O **Stock Products** nasceu como projeto inicial de estudos com React, com foco em:
 
-O Stock Products nasceu como projeto inicial de estudos com React, evoluindo para um projeto fullstack com backend próprio.
+- Organização de rotas com React Router v6
+- Criação e consumo de componentes reutilizáveis
+- Uso de hooks customizados
+- Integração com API própria para CRUD de produtos
 
-Foco inicial:
+**Status atual:**
 
-Organização de rotas com React Router v6
+- CRUD completo de produtos
+- Backend próprio com Node.js, Express e MongoDB (Mongoose)
+- Refatoração para melhor integração frontend ↔ backend
 
-Criação e consumo de componentes reutilizáveis
+**Próximas melhorias:**
 
-Uso de hooks customizados
+- Autenticação JWT
+- Melhor gerenciamento de estado global
 
-Integração com API externa via MockAPI.io para CRUD de produtos
+---
 
-Status atual:
+## 🚀 Funcionalidades
 
-CRUD completo de produtos
+- **Listagem de produtos:** `/produtos/all`  
+- **Adição de novos produtos:** `/produtos/newitem`  
+- **Remoção de produtos**  
+- **Edição de produtos:** `/produtos/update/:id`  
+- **Visualização detalhada:** `/produtos/:id`
 
-Backend próprio com Node.js, Express e MongoDB (Mongoose)
+---
 
-Deploy: frontend no Vercel, backend no Render
+## 🔄 Fluxo de dados
+O estado global é gerenciado pelo hook customizado `useUtils`, responsável por se comunicar com a API:
 
-Próximas melhorias:
+- `fetchData` → busca todos os produtos  
+- `addProduct` → adiciona produto  
+- `deleteProducts` → remove produto  
+- `getProductId` → retorna produto pelo ID  
+- `updateProduct` → atualiza produto existente  
 
-Autenticação JWT
+**Fonte de dados:**
 
-Melhor gerenciamento de estado e integração API ↔ frontend
+- Atual: MongoDB via Mongoose (backend próprio)  
+- Antes: MockAPI.io
 
-🚀 Funcionalidades
+---
 
-Listagem de produtos: /produtos/all
+## 🛠️ Tecnologias
 
-Adição de novos produtos: /produtos/newitem
+- **Frontend:** React, React Router v6, Vercel  
+- **Backend:** Node.js, Express, MongoDB (Mongoose), Render  
+- **Autenticação (em breve):** JWT  
 
-Remoção de produtos
+---
 
-Edição de produtos: /produtos/update/:id
+## 🖥️ Como rodar localmente
 
-Visualização detalhada: /produtos/:id
-
-🔄 Fluxo de dados
-
-O estado global é gerenciado por um hook customizado useUtils, responsável por se comunicar com a API:
-
-fetchData → busca todos os produtos
-
-addProduct → adiciona produto
-
-deleteProducts → remove produto
-
-getProductId → retorna produto pelo ID
-
-updateProduct → atualiza produto existente
-
-Fonte de dados:
-
-Atual: MongoDB (Mongoose)
-
-Antigo (Mock): MockAPI.io
-
-🛠️ Tecnologias
-
-Frontend:
-
-React
-
-React Router v6
-
-CSS/SCSS
-
-Vercel para deploy
-
-Backend:
-
-Node.js
-
-Express
-
-MongoDB (Mongoose)
-
-Render para deploy
-
-🖥️ Como rodar localmente
-
-Clone o repositório:
-
+```bash
+# Clone o repositório
 git clone https://github.com/EriclysLuckas/STOCK.git
 cd STOCK/stockProducts
 
-
-Instale as dependências:
-
+# Instale as dependências
 npm install
 
-
-Rode em desenvolvimento:
-
+# Rode em desenvolvimento
 npm start
 
-
-Acesse em:
-
+# Acesse em:
 http://localhost:3000
+🔗 Observações de deploy
+O frontend será hospedado na Vercel
+
+O backend será hospedado no Render, conectado ao MongoDB Atlas
+
+Lembre-se de ajustar o .env do backend com sua URL do MongoDB e porta
