@@ -1,26 +1,12 @@
 import style from "./AddItemForm.module.css";
 import useBaseContext from "../../hooks/userBaseContext";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddItemForm() {
   const { id } = useParams(); // Obtém o ID do produto da URL, se disponível
-  const navigate = useNavigate(); // Inicializa useNavigate
-  const { addProduct, updateProduct, getProductId  } = useBaseContext();
-  
- // Formata a data atual
- const formatDate = (date) => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  return `${year}-${month}-${day} | ${hours}:${minutes}`;
-};
-const currentDate = new Date();
-const formattedDate = formatDate(currentDate);
-
-
+  const navigate = useNavigate();
+  const { addProduct, updateProduct, getProductId } = useBaseContext();
 
   // Estado para armazenar dados do formulário
   const [formData, setFormData] = useState({
@@ -29,32 +15,27 @@ const formattedDate = formatDate(currentDate);
     price: "",
     category: "",
     desc: "",
-    date: "",
   });
-  const buttonFormText = id ? "Atualizar" : "Salvar"
 
+  const buttonFormText = id ? "Atualizar" : "Salvar";
 
   useEffect(() => {
     const fetchProduct = async () => {
       if (id) {
-        const productsForGet = await getProductId(id); // Busca o produto pelo ID
-        if (productsForGet) {
+        const product = await getProductId(id);
+        if (product) {
           setFormData({
-            name: productsForGet.name || "",
-            quantity: productsForGet.quantity || "",
-            price: productsForGet.price || "",
-            category: productsForGet.category || "",
-            desc: productsForGet.desc || "",
-            date: productsForGet.date || formattedDate,
+            name: product.name || "",
+            quantity: product.quantity || "",
+            price: product.price || "",
+            category: product.category || "",
+            desc: product.desc || "",
           });
         }
       }
     };
     fetchProduct();
-  }, [id, getProductId, formattedDate]); // Adicionando dependências
-
- 
-  
+  }, [id, getProductId]);
 
   // Atualiza o estado do formulário conforme o usuário digita
   const onChange = (e) => {
@@ -65,14 +46,10 @@ const formattedDate = formatDate(currentDate);
     }));
   };
 
- 
   // Lida com o envio do formulário
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name) {
-      console.error("Nome é obrigatório");
-      return;
-    }
+    if (!formData.name) return console.error("Nome é obrigatório");
 
     const productData = {
       name: formData.name,
@@ -80,19 +57,13 @@ const formattedDate = formatDate(currentDate);
       price: Number(formData.price),
       category: formData.category,
       desc: formData.desc,
-      date: formattedDate,
     };
 
-
-if (id) {
-      // Atualiza o produto existente
+    if (id) {
       await updateProduct(id, productData);
-      
     } else {
-      // Adiciona um novo produto
       await addProduct(productData);
     }
-
 
     setFormData({
       name: "",
@@ -100,7 +71,6 @@ if (id) {
       price: "",
       category: "",
       desc: "",
-      date: "",
     });
 
     navigate("/produtos/all");
@@ -171,7 +141,9 @@ if (id) {
           ></textarea>
         </div>
         <div className={style.formCarryBlock}>
-          <button type="submit"  className={style.btnFormCarryBlock}>{buttonFormText}</button>
+          <button type="submit" className={style.btnFormCarryBlock}>
+            {buttonFormText}
+          </button>
         </div>
       </form>
     </section>

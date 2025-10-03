@@ -26,10 +26,10 @@ export const TemplateProduct = () => {
           <span > {productsid.name} </span>
 
         </div>
-        {productsid && productsid.id ? (
+        {productsid && productsid._id ? (
           <div className={styleProductView.actionHeaderProductView}>
-            <ButtonAction type="update" productId={productsid.id} />
-            <ButtonAction type="delete" productId={productsid.id} />
+            <ButtonAction type="update" productId={productsid._id} />
+            <ButtonAction type="delete" productId={productsid._id} />
           </div>
         ) : (
           null
@@ -50,7 +50,9 @@ export const TemplateProduct = () => {
 
       </div>
 
-      <span className = {styleProductView.date}>Última atualização {productsid.date}</span>
+      <span className = {styleProductView.date}>Ultima Atualização: {new Date(productsid.updatedAt).toLocaleString()}</span> <br />
+      
+      <span className = {styleProductView.date}>Data de Criação: {new Date(productsid.createdAt).toLocaleString()}</span>
 
 
     </div>

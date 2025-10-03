@@ -2,30 +2,31 @@ import { useState, useEffect } from "react";
 
 export default function useUtils() {
   const [base, setBase] = useState([]);
+  const BASE_URL = "http://192.168.1.83:3000/products";
 
-    const fetchData = async () => {
-      const response = await fetch("https://6723d042493fac3cf24c5624.mockapi.io/products");
-      const jsonProducts = await response.json();
+  const fetchData = async () => {
+    const response = await fetch(BASE_URL);
+    const jsonProducts = await response.json();
 
-      setBase(jsonProducts);
-    };
-    
+    setBase(jsonProducts);
+  };
+
   useEffect(() => {
     fetchData()
   }, []);
 
 
   const addProduct = async (newProducts) => {
-    
 
-    await  fetch("https://6723d042493fac3cf24c5624.mockapi.io/products",{
+
+    await fetch("http://192.168.1.83:3000/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body:JSON.stringify(newProducts),
+      body: JSON.stringify(newProducts),
     })
-   
+
     fetchData()
   }
 
@@ -33,30 +34,30 @@ export default function useUtils() {
 
   const deleteProducts = async (id) => {
 
-    await fetch(`https://6723d042493fac3cf24c5624.mockapi.io/products/${id}`, {
+    await fetch(`http://192.168.1.83:3000/products/${id}`, {
       method: "DELETE",
-      headers: {"Content-Type": "application/json"}
+      headers: { "Content-Type": "application/json" }
     })
     fetchData()
   }
 
 
-  
 
-  const getProductId=  async (id) => {
 
-    const response = await fetch(`https://6723d042493fac3cf24c5624.mockapi.io/products/${id}`)
+  const getProductId = async (id) => {
+
+    const response = await fetch(`http://192.168.1.83:3000/products/${id}`)
     const products = await response.json()
 
-    
+
     return products
   };
 
 
   // Função para atualizar um produto
   const updateProduct = async (id, updatedProduct) => {
-    await fetch(`https://6723d042493fac3cf24c5624.mockapi.io/products/${id}`, {
-      method: "PUT", 
+    await fetch(`http://192.168.1.83:3000/products/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
@@ -65,6 +66,6 @@ export default function useUtils() {
     fetchData(); // Atualiza a lista de produtos após a atualização
   };
 
- return {base, addProduct, deleteProducts, getProductId, updateProduct }
+  return { base, addProduct, deleteProducts, getProductId, updateProduct }
 }
 

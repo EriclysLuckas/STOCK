@@ -28,7 +28,7 @@ export default function TableContentF() {
             <tr key={products.id} className={style.trTableF}>
               <td>{products.name}</td>
               <td>{products.quantity}</td>
-              <td><ButtonAction type="view" productId={products.id} /></td>
+              <td><ButtonAction type="view" productId={products._id} /></td>
             </tr>
           ))}
 

@@ -21,9 +21,9 @@ export default function TableContent() {
 
           {lastItens.map((products) => (
 
-            <tr key={products.id} >
+            <tr key={products._id} >
               <td>{products.name}</td>
-              <td><ButtonAction type="view" productId={products.id} />
+              <td><ButtonAction type="view" productId={products._id} />
               </td>
 
             </tr>
