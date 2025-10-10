@@ -33,8 +33,6 @@ O STOCK é um projeto de estudos utilizando **React + Node.js + MongoDB**, focad
 
 **Próximas melhorias:**  
 - Autenticação de usuários com JWT  
-- Proteção de rotas (roles: admin / usuário)  
-- Upload de imagens de produtos  
 - Dashboard com gráficos de produtos e categorias  
 
 ---
