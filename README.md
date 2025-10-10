@@ -1,84 +1,121 @@
-# Stock Products
+STOCK – Sistema de Gestão de Produtos
 
-## 🔗 Acesse
-- **Versão em produção (Frontend):** [stock-smoky.vercel.app](https://stock-smoky.vercel.app)
-- **API Backend:** Hospedada no Render com Node.js, Express e MongoDB
+🔗 Acessos:
 
----
+Frontend (Vercel): stock-smoky.vercel.app
 
-## 🧩 Sobre o projeto
-O **Stock Products** nasceu como projeto inicial de estudos com React, com foco em:
+Backend (Render API): https://stock-la2f.onrender.com
 
-- Organização de rotas com React Router v6
-- Criação e consumo de componentes reutilizáveis
-- Uso de hooks customizados
-- Integração com API própria para CRUD de produtos
+🧩 Sobre o projeto
 
-**Status atual:**
+O STOCK é um projeto de estudos com React + Node.js + MongoDB, focado em:
 
-- CRUD completo de produtos
-- Backend próprio com Node.js, Express e MongoDB (Mongoose)
-- Refatoração para melhor integração frontend ↔ backend
+CRUD completo de produtos (criar, listar, editar, deletar)
 
-**Próximas melhorias:**
+Organização de rotas com React Router v6
 
-- Autenticação JWT
-- Melhor gerenciamento de estado global
+Componentes reutilizáveis (botões, tabelas, formulários)
 
----
+Integração real entre Frontend ↔ Backend via API
 
-## 🚀 Funcionalidades
+Uso de hooks customizados e Context API
 
-- **Listagem de produtos:** `/produtos/all`  
-- **Adição de novos produtos:** `/produtos/newitem`  
-- **Remoção de produtos**  
-- **Edição de produtos:** `/produtos/update/:id`  
-- **Visualização detalhada:** `/produtos/:id`
+Deploy completo no Vercel (frontend) e Render (backend)
 
----
+Status atual:
+✅ CRUD funcional
+✅ Backend conectado ao MongoDB Atlas
+✅ Frontend consumindo a API do backend
 
-## 🔄 Fluxo de dados
-O estado global é gerenciado pelo hook customizado `useUtils`, responsável por se comunicar com a API:
+Próximas melhorias:
 
-- `fetchData` → busca todos os produtos  
-- `addProduct` → adiciona produto  
-- `deleteProducts` → remove produto  
-- `getProductId` → retorna produto pelo ID  
-- `updateProduct` → atualiza produto existente  
+Autenticação de usuários com JWT
 
-**Fonte de dados:**
+Proteção de rotas (roles: admin / usuário)
 
-- Atual: MongoDB via Mongoose (backend próprio)  
-- Antes: MockAPI.io
+Upload de imagens de produtos
 
----
+Dashboard com gráficos de produtos e categorias
 
-## 🛠️ Tecnologias
+🚀 Funcionalidades
 
-- **Frontend:** React, React Router v6, Vercel  
-- **Backend:** Node.js, Express, MongoDB (Mongoose), Render  
-- **Autenticação (em breve):** JWT  
+Listagem de produtos: /produtos/all
 
----
+Adição de novos produtos: /produtos/newitem
 
-## 🖥️ Como rodar localmente
+Edição de produtos: /produtos/update/:id
 
-```bash
-# Clone o repositório
-git clone https://github.com/EriclysLuckas/STOCK.git
+Exclusão de produtos com confirmação modal
+
+Visualização detalhada de cada produto: /produtos/:id
+
+🔄 Fluxo de dados
+
+O estado global é gerenciado pelo hook customizado useBaseContext:
+
+fetchData() → busca todos os produtos
+
+addProduct() → adiciona produto
+
+deleteProducts() → remove produto
+
+getProductId() → retorna produto pelo ID
+
+updateProduct() → atualiza produto existente
+
+Fonte de dados:
+
+Atual: MongoDB Atlas (via Mongoose)
+
+Futuro: suporte a múltiplos usuários com autenticação JWT
+
+🛠️ Tecnologias
+
+Frontend: React, React Router v6, ShadCN UI
+
+Backend: Node.js, Express, MongoDB, Mongoose
+
+Deploy: Vercel (frontend), Render (backend)
+
+Extras: Context API, Hooks customizados, Toast notifications
+
+🖥️ Como rodar localmente
+
+Clone o repositório:
+
+git clone https://github.com/EriclysLuckas/STOCK
 cd STOCK/stockProducts
 
-# Instale as dependências
+
+Instale as dependências:
+
 npm install
 
-# Rode em desenvolvimento
+
+Crie um arquivo .env no backend com suas variáveis:
+
+DB_PASSWORD=SEU_PASSWORD
+PORT=3000
+
+
+Rode o backend:
+
 npm start
 
-# Acesse em:
-http://localhost:3000
-🔗 Observações de deploy
-O frontend será hospedado na Vercel
 
-O backend será hospedado no Render, conectado ao MongoDB Atlas
+Rode o frontend:
 
-Lembre-se de ajustar o .env do backend com sua URL do MongoDB e porta
+npm run dev
+
+
+Acesse:
+
+http://localhost:5173
+
+💡 Observações
+
+Projeto pronto para receber autenticação JWT.
+
+Variáveis sensíveis como senha do banco são armazenadas em .env e no Render Environment Variables.
+
+Estrutura organizada: backend separado (models, controllers, routes), frontend modularizado por páginas e componentes.
