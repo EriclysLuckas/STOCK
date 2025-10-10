@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function AddItemForm() {
-  const { id } = useParams(); // Obtém o ID do produto da URL, se disponível
+  const { id } = useParams();
   const navigate = useNavigate();
   const { addProduct, updateProduct, getProductId } = useBaseContext();
 
-  // Estado para armazenar dados do formulário
   const [formData, setFormData] = useState({
     name: "",
     quantity: "",
@@ -17,7 +16,13 @@ export default function AddItemForm() {
     desc: "",
   });
 
-  const buttonFormText = id ? "Atualizar" : "Salvar";
+  const [isLoading, setIsLoading] = useState(false); // 👈 estado de carregamento
+
+  const buttonFormText = isLoading
+    ? "Salvando..."
+    : id
+    ? "Atualizar"
+    : "Salvar";
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -32,8 +37,47 @@ export default function AddItemForm() {
             desc: product.desc || "",
           });
         }
-      }else {
-      // Se não houver id, limpa o formulário
+      } else {
+        setFormData({
+          name: "",
+          quantity: "",
+          price: "",
+          category: "",
+          desc: "",
+        });
+      }
+    };
+    fetchProduct();
+  }, [id, getProductId]);
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (isLoading) return; // 👈 evita múltiplos cliques
+    setIsLoading(true);
+
+    try {
+      const productData = {
+        name: formData.name,
+        quantity: Number(formData.quantity),
+        price: Number(formData.price),
+        category: formData.category,
+        desc: formData.desc,
+      };
+
+      if (id) {
+        await updateProduct(id, productData);
+      } else {
+        await addProduct(productData);
+      }
+
       setFormData({
         name: "",
         quantity: "",
@@ -41,49 +85,13 @@ export default function AddItemForm() {
         category: "",
         desc: "",
       });
+
+      navigate("/produtos/all");
+    } catch (error) {
+      console.error("Erro ao salvar produto:", error);
+    } finally {
+      setIsLoading(false); // 👈 volta ao normal
     }
-    };
-    fetchProduct();
-  }, [id, getProductId]);
-
-  // Atualiza o estado do formulário conforme o usuário digita
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  // Lida com o envio do formulário
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.name) return console.error("Nome é obrigatório");
-
-    const productData = {
-      name: formData.name,
-      quantity: Number(formData.quantity),
-      price: Number(formData.price),
-      category: formData.category,
-      desc: formData.desc,
-    };
-
-    if (id) {
-      await updateProduct(id, productData);
-    } else {
-      
-      await addProduct(productData);
-    }
-
-    setFormData({
-      name: "",
-      quantity: "",
-      price: "",
-      category: "",
-      desc: "",
-    });
-
-    navigate("/produtos/all");
   };
 
   return (
@@ -99,6 +107,7 @@ export default function AddItemForm() {
               value={formData.name}
               onChange={onChange}
               required
+              disabled={isLoading} // 👈 desativa enquanto salva
             />
           </div>
           <div className={style.boxinput}>
@@ -110,6 +119,7 @@ export default function AddItemForm() {
               value={formData.quantity}
               onChange={onChange}
               required
+              disabled={isLoading}
             />
           </div>
           <div className={style.boxinput}>
@@ -121,6 +131,7 @@ export default function AddItemForm() {
               value={formData.price}
               onChange={onChange}
               required
+              disabled={isLoading}
             />
           </div>
           <div className={style.boxinput}>
@@ -131,6 +142,7 @@ export default function AddItemForm() {
               id="categoryForm"
               value={formData.category}
               required
+              disabled={isLoading}
             >
               <option value="">Selecione a Categoria</option>
               <option value="Categoria1">Categoria 1</option>
@@ -148,10 +160,15 @@ export default function AddItemForm() {
             id="descForm"
             value={formData.desc}
             required
+            disabled={isLoading}
           ></textarea>
         </div>
         <div className={style.formCarryBlock}>
-          <button type="submit" className={style.btnFormCarryBlock}>
+          <button
+            type="submit"
+            className={style.btnFormCarryBlock}
+            disabled={isLoading} // 👈 botão desativado
+          >
             {buttonFormText}
           </button>
         </div>
