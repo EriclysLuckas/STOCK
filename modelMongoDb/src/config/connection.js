@@ -4,8 +4,9 @@ import  mongoose from 'mongoose';
 dontenv.config();
 
 
+const password = process.env.DB_PASSWORD;
+const MongUri  = `mongodb+srv://sa:${password}@mongobase.jei6j2t.mongodb.net/mongoBase?retryWrites=true&w=majority`;
 
-const MongUri = process.env.MONG_URI.replace('${db_password}', process.env.db_password);
 
 
 const connectDB = async () => {
