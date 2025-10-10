@@ -17,18 +17,18 @@ export default function TableGeneralItens() {
         </tr>
       </thead>
       <tbody>
-        {base.map((products) => (
+        {base.map((product) => (
 
-          <tr key={products._id} >
-            <td>{products._id}</td>
-            <td >{products.name}</td>
-            <td>{products.quantity}</td>
-            <td> {products.category}</td>
+          <tr key={product._id} >
+            <td>{product._id}</td>
+            <td >{product.name}</td>
+            <td>{product.quantity}</td>
+            <td> {product.category}</td>
             <td className={style.tdBtnAll}>
-              {/* <button className={style.btnProducts} onClick = {()=> handleView(products._id)}><FaEye /></button> */}
-              <ButtonAction type="view" productId={products._id} />
-              <ButtonAction type="update" productId={products._id} />
-              <ButtonAction type="delete" productId={products._id} productName ={products.name} />
+              {/* <button className={style.btnproduct} onClick = {()=> handleView(product._id)}><FaEye /></button> */}
+              <ButtonAction type="view" productId={product._id}  productName ={product.name} />
+              <ButtonAction type="update" productId={product._id} productName ={product.name}  />
+              <ButtonAction type="delete" productId={product._id} productName ={product.name} />
             </td>
           </tr>
         ))}

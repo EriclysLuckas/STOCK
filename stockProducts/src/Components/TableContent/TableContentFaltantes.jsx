@@ -24,11 +24,11 @@ export default function TableContentF() {
         </thead>
         <tbody>
 
-          {filteredProducts.map((products) => (
-            <tr key={products._id} className={style.trTableF}>
-              <td>{products.name}</td>
-              <td>{products.quantity}</td>
-              <td><ButtonAction type="view" productId={products._id} /></td>
+          {filteredProducts.map((product) => (
+            <tr key={product._id} className={style.trTableF}>
+              <td>{product.name}</td>
+              <td>{product.quantity}</td>
+              <td><ButtonAction type="view" productId={product._id}  productName={product.name} /></td>
             </tr>
           ))}
 

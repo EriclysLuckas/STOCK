@@ -19,11 +19,11 @@ export default function TableContent() {
         </thead>
         <tbody>
 
-          {lastItens.map((products) => (
+          {lastItens.map((product) => (
 
-            <tr key={products._id} >
-              <td>{products.name}</td>
-              <td><ButtonAction type="view" productId={products._id} />
+            <tr key={product._id}             >
+              <td>{product.name}</td>
+              <td><ButtonAction type="view" productId={product._id} productName ={product.name}  />
               </td>
 
             </tr>

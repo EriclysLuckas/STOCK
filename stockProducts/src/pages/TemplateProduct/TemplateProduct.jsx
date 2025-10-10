@@ -7,14 +7,14 @@ export const TemplateProduct = () => {
 
   const { id } = useParams()                                  //UTILIZA O ID COMO PARAMS
   const { getProductId } = useBaseContext()                   //CHAMA A FUNÇÃO QUE RETORNA O PRODUTO PELO ID
-  const [productsid, setProductsid] = useState({})            // CRIEI UM STATE PARA ARMAZENAR O PRODUTO
+  const [productid, setProductid] = useState({})            // CRIEI UM STATE PARA ARMAZENAR O PRODUTO
 
   useEffect(() => {
-    const fethcProductsId = async () => {
+    const fethcproductid = async () => {
       const productsview = await getProductId(id)             // inicio uma const que aguarda o retorno do ID
-      setProductsid(productsview)                             //armazeno os produtos por id no state
+      setProductid(productsview)                             //armazeno os produtos por id no state
     }
-    fethcProductsId()                                         //executo minha função
+    fethcproductid()                                         //executo minha função
 
   }, [id, getProductId])
 
@@ -23,13 +23,13 @@ export const TemplateProduct = () => {
     <div className={styleProductView.contentProductView}>
       <div className={styleProductView.headerProductView}>
         <div className={styleProductView.NameProductView}>
-          <span > {productsid.name} </span>
+          <span > {productid.name} </span>
 
         </div>
-        {productsid && productsid._id ? (
+        {productid && productid._id ? (
           <div className={styleProductView.actionHeaderProductView}>
-            <ButtonAction type="update" productId={productsid._id} />
-            <ButtonAction type="delete" productId={productsid._id} />
+            <ButtonAction type="update" productId={productid._id} productName ={productid.name} />
+            <ButtonAction type="delete" productId={productid._id} productName ={productid.name} />
           </div>
         ) : (
           null
@@ -38,21 +38,21 @@ export const TemplateProduct = () => {
 
       <div className={styleProductView.bodyProductView}>
         <div className={styleProductView.contentCardsProductView}>
-          <div className={styleProductView.cardsProductView}> <strong>Categoria: </strong> {productsid.category}</div>
-          <div className={styleProductView.cardsProductView}><strong>Quantidade em estoque: </strong> {productsid.quantity}</div>
-          <div className={styleProductView.cardsProductView}> <strong>Preço: </strong> R${productsid.price}      </div>
+          <div className={styleProductView.cardsProductView}> <strong>Categoria: </strong> {productid.category}</div>
+          <div className={styleProductView.cardsProductView}><strong>Quantidade em estoque: </strong> {productid.quantity}</div>
+          <div className={styleProductView.cardsProductView}> <strong>Preço: </strong> R${productid.price}      </div>
 
 
         </div>
         <div className={styleProductView.descProductView}>
-          <span ><strong>Descrição: </strong> </span> <span>{productsid.desc}</span>
+          <span ><strong>Descrição: </strong> </span> <span>{productid.desc}</span>
         </div>
 
       </div>
 
-      <span className = {styleProductView.date}>Ultima Atualização: {new Date(productsid.updatedAt).toLocaleString()}</span> <br />
+      <span className = {styleProductView.date}>Ultima Atualização: {new Date(productid.updatedAt).toLocaleString()}</span> <br />
       
-      <span className = {styleProductView.date}>Data de Criação: {new Date(productsid.createdAt).toLocaleString()}</span>
+      <span className = {styleProductView.date}>Data de Criação: {new Date(productid.createdAt).toLocaleString()}</span>
 
 
     </div>

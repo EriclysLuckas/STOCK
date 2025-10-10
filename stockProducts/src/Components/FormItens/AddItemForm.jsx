@@ -32,7 +32,16 @@ export default function AddItemForm() {
             desc: product.desc || "",
           });
         }
-      }
+      }else {
+      // Se não houver id, limpa o formulário
+      setFormData({
+        name: "",
+        quantity: "",
+        price: "",
+        category: "",
+        desc: "",
+      });
+    }
     };
     fetchProduct();
   }, [id, getProductId]);
@@ -62,6 +71,7 @@ export default function AddItemForm() {
     if (id) {
       await updateProduct(id, productData);
     } else {
+      
       await addProduct(productData);
     }
 
