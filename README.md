@@ -10,7 +10,7 @@
 
 ## 🔗 Acesse o projeto
 
-- **Frontend (Vercel):** [stock-smoky.vercel.app](https://stock-smoky.vercel.app)  
+- **Frontend (Vercel):** [https://stock-indol-three.vercel.app]([https://stock-smoky.vercel.app](https://stock-indol-three.vercel.app))  
 - **Backend (Render API):** `https://stock-la2f.onrender.com`  
 
 ---
