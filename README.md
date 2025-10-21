@@ -57,7 +57,7 @@ O estado global é gerenciado pelo hook customizado `useBaseContext`:
 
 **Fonte de dados:**  
 - Atual: MongoDB Atlas (via Mongoose)  
-- Futuro: suporte a múltiplos usuários com autenticação JWT  
+- Futuro: 
 
 ---
 
