@@ -28,8 +28,8 @@ export const TemplateProduct = () => {
         </div>
         {productid && productid._id ? (
           <div className={styleProductView.actionHeaderProductView}>
-            <ButtonAction type="update" productId={productid._id} productName ={productid.name} />
-            <ButtonAction type="delete" productId={productid._id} productName ={productid.name} />
+            <ButtonAction type="update" productId={productid._id} productName={productid.name} />
+            <ButtonAction type="delete" productId={productid._id} productName={productid.name} />
           </div>
         ) : (
           null
@@ -40,8 +40,13 @@ export const TemplateProduct = () => {
         <div className={styleProductView.contentCardsProductView}>
           <div className={styleProductView.cardsProductView}> <strong>Categoria: </strong> {productid.category}</div>
           <div className={styleProductView.cardsProductView}><strong>Quantidade em estoque: </strong> {productid.quantity}</div>
-          <div className={styleProductView.cardsProductView}> <strong>Preço: </strong> R${productid.price}      </div>
-
+          <div className={styleProductView.cardsProductView}>
+            <strong>Preço: </strong>
+            {productid.price !== undefined && productid.price !== null
+              ? new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(productid.price)
+              : "R$ 0,00"
+            }
+          </div>
 
         </div>
         <div className={styleProductView.descProductView}>
@@ -50,9 +55,9 @@ export const TemplateProduct = () => {
 
       </div>
 
-      <span className = {styleProductView.date}>Ultima Atualização: {new Date(productid.updatedAt).toLocaleString()}</span> <br />
-      
-      <span className = {styleProductView.date}>Data de Criação: {new Date(productid.createdAt).toLocaleString()}</span>
+      <span className={styleProductView.date}>Ultima Atualização: {new Date(productid.updatedAt).toLocaleString()}</span> <br />
+
+      <span className={styleProductView.date}>Data de Criação: {new Date(productid.createdAt).toLocaleString()}</span>
 
 
     </div>

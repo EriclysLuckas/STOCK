@@ -21,8 +21,8 @@ export default function AddItemForm() {
   const buttonFormText = isLoading
     ? "Salvando..."
     : id
-    ? "Atualizar"
-    : "Salvar";
+      ? "Atualizar"
+      : "Salvar";
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -125,16 +125,23 @@ export default function AddItemForm() {
           <div className={style.boxinput}>
             <label htmlFor="priceForm">Preço</label>
             <input
-              type="number"
+              type="text" // alterar de number para text
               name="price"
               id="priceForm"
               value={formData.price}
-              onChange={onChange}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9,]/g, ""); // permite só números e vírgula
+                setFormData((prev) => ({ ...prev, price: value }));
+              }}
+              onBlur={() => {
+                // converte vírgula para ponto e formata número
+                const numeric = parseFloat(formData.price.replace(",", ".")) || 0;
+                setFormData((prev) => ({ ...prev, price: numeric.toFixed(2) }));
+              }}
               required
               disabled={isLoading}
             />
-          </div>
-          <div className={style.boxinput}>
+          </div>          <div className={style.boxinput}>
             <label htmlFor="categoryForm">Categoria do Produto</label>
             <select
               onChange={onChange}

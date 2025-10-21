@@ -1,71 +1,116 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+
+const BASE_URL = "https://stock-la2f.onrender.com/products";
 
 export default function useUtils() {
   const [base, setBase] = useState([]);
-  const BASE_URL = "https://stock-la2f.onrender.com/products";
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    const response = await fetch(BASE_URL);
-    const jsonProducts = await response.json();
+  // Busca todos os produtos
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-    setBase(jsonProducts);
-  };
+      const response = await fetch(BASE_URL);
+      if (!response.ok) throw new Error("Erro ao buscar produtos");
 
-  useEffect(() => {
-    fetchData()
+      const jsonProducts = await response.json();
+      setBase(jsonProducts);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
+  // Busca inicial
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-  const addProduct = async (newProducts) => {
+  // Adiciona novo produto (ou soma se já existir no backend)
+  const addProduct = useCallback(async (newProduct) => {
+    try {
+      const response = await fetch(BASE_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProduct),
+      });
 
+      if (!response.ok) throw new Error("Erro ao adicionar produto");
 
-    await fetch("https://stock-la2f.onrender.com/products", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newProducts),
-    })
+      const createdOrUpdated = await response.json();
 
-    fetchData()
-  }
+      // Atualiza estado local: se já existe, substitui; senão, adiciona
+      setBase((prev) => {
+        const exists = prev.find((p) => p._id === createdOrUpdated._id);
+        if (exists) {
+          return prev.map((p) =>
+            p._id === createdOrUpdated._id ? createdOrUpdated : p
+          );
+        }
+        return [...prev, createdOrUpdated];
+      });
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
+  }, []);
 
+  // Deleta produto
+  const deleteProducts = useCallback(async (id) => {
+    try {
+      const response = await fetch(`${BASE_URL}/${id}`, {
+        method: "DELETE",
+      });
 
+      if (!response.ok) throw new Error("Erro ao deletar produto");
 
-  const deleteProducts = async (id) => {
+      setBase((prev) => prev.filter((p) => p._id !== id));
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
+  }, []);
 
-    await fetch(`https://stock-la2f.onrender.com/products/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    })
-    fetchData()
-  }
+  // Busca produto por ID
+  const getProductId = useCallback(async (id) => {
+    const response = await fetch(`${BASE_URL}/${id}`);
+    if (!response.ok) throw new Error("Erro ao buscar produto por ID");
+    return await response.json();
+  }, []);
 
+  // Atualiza produto
+  const updateProduct = useCallback(async (id, updatedProduct) => {
+    try {
+      const response = await fetch(`${BASE_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedProduct),
+      });
 
+      if (!response.ok) throw new Error("Erro ao atualizar produto");
 
+      const updated = await response.json();
+      setBase((prev) =>
+        prev.map((p) => (p._id === id ? { ...p, ...updated } : p))
+      );
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
+  }, []);
 
-  const getProductId = async (id) => {
-
-    const response = await fetch(`https://stock-la2f.onrender.com/products/${id}`)
-    const products = await response.json()
-
-
-    return products
+  return {
+    base,
+    loading,
+    error,
+    fetchData,
+    addProduct,
+    deleteProducts,
+    getProductId,
+    updateProduct,
   };
-
-
-  // Função para atualizar um produto
-  const updateProduct = async (id, updatedProduct) => {
-    await fetch(`https://stock-la2f.onrender.com/products/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(updatedProduct),
-    });
-    fetchData(); // Atualiza a lista de produtos após a atualização
-  };
-
-  return { base, addProduct, deleteProducts, getProductId, updateProduct }
 }
-

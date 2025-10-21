@@ -1,17 +1,28 @@
-import mongoose from 'mongoose';
-import { nanoid } from "nanoid"; // IMPORT CORRETO
+import mongoose from "mongoose";
+import { nanoid } from "nanoid";
 
+// Define o schema
+const productSchema = new mongoose.Schema(
+  {
+    _id: { type: String, default: () => nanoid(5) },
+    name: { type: String, required: true, maxLength: 30, trim: true },
+    quantity: { type: Number, required: true },
+    price: { type: Number, required: true },
+    category: { type: String, required: true },
+    desc: { type: String },
+  },
+  { timestamps: true }
+);
 
-const product = new mongoose.Schema({
-_id: { type: String, default: () => nanoid(5) }, 
-name: {type: String, required: true},
-quantity: {type: Number, required: true},
-price: {type: Number, required: true},
-category: {type: String, required: true},
-desc: {type: String},
+// 🔹 Normaliza antes de salvar (garante consistência)
+productSchema.pre("save", function (next) {
+  if (this.name) this.name = this.name.trim().toLowerCase();
+  if (this.category) this.category = this.category.trim().toLowerCase();
+  next();
+});
 
-},
-    { timestamps: true }
-)
+// 🔹 Índice composto opcional (garante que não existam dois produtos com o mesmo nome + categoria)
+productSchema.index({ name: 1, category: 1 }, { unique: true });
 
-export default mongoose.model('Product', product);
+// Exporta o model
+export default mongoose.model("Product", productSchema);
