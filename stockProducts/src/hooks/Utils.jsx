@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-const BASE_URL = "https://stock-la2f.onrender.com/products";
+const BASE_URL = "http://localhost:3000/products";
 
 export default function useUtils() {
   const [base, setBase] = useState([]);

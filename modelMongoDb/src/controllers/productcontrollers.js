@@ -30,7 +30,7 @@ export const getProductsById = async (req, res) => {
 }
 
 
-export const createOrUpdateProduct = async (req, res) => {
+export const createOrUpdateProduct = async (req, res) => { 
   try {
     const { name, quantity, price, desc, category } = req.body;
 
