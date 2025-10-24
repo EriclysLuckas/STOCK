@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import style from "./TableContent.module.css";
 import { ButtonAction } from '../ButtonAction/ButtonAction';
-
 import useBaseContext from "../../hooks/userBaseContext";
+
 
 
 
@@ -18,7 +18,7 @@ export default function TableContentF() {
         <thead>
           <tr>
             <th scope="col">Itens Acabando</th>
-            <th scope="col">Qnt</th>
+            <th scope="col">Quantidade</th>
             <th scope="col">Ação</th>
           </tr>
         </thead>

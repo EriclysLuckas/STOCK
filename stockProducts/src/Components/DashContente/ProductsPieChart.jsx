@@ -20,7 +20,7 @@ export default function ProductsPieChart() {
     setChartData(data);
   }, [base]);
 
-  const COLORS = ["#046F5D", "#845EC3", "#4145FF", "#0065FC", "#a4de6c", "#d0ed57", "#ffc658"];
+  const COLORS = ["#151C48", "#3B70A2", "#0065FC", "#174580", "#a4de6c", "#d0ed57", "#ffc658"];
 
 
   const renderCustomLabel = ({
@@ -55,15 +55,20 @@ export default function ProductsPieChart() {
 
 
   return (
-    <ResponsiveContainer width="100%" height={400} >
-      <PieChart  >
+    <ResponsiveContainer width="100%" height={400}
+      style={{
+        outline: "none",
+        border: "none",
+        userSelect: "none",
+      }} >
+      <PieChart  style={{ cursor: 'pointer' }} >
         <Pie
           data={chartData}
           dataKey="value"
           nameKey="name"
           cx="50%"
-          cy="55%"
-          outerRadius={90}
+          cy="45%"
+          outerRadius={115}
           label={renderCustomLabel}
           labelLine={false}
           stroke="#424241"
@@ -87,7 +92,9 @@ export default function ProductsPieChart() {
           itemStyle={{ color: '#fff' }} />
         <Legend
           content={({ payload }) => (
-            <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+            <div style={{
+              display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", marginTop: "-70px",
+            }}>
               {payload.map((entry, index) => (
                 <div key={`legend-${index}`} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                   <div style={{ width: 12, height: 12, backgroundColor: entry.color }}></div>

@@ -32,3 +32,31 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* remove outline/foco/traço ao clicar em elementos SVG do Recharts */
+.recharts-wrapper,
+.recharts-wrapper svg {
+  user-select: none; /* evita seleção arrastando */
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* remove qualquer contorno/stroke no foco/active do rect/path (barras, fatias etc) */
+.recharts-wrapper svg rect:focus,
+.recharts-wrapper svg rect:active,
+.recharts-wrapper svg path:focus,
+.recharts-wrapper svg path:active,
+.recharts-wrapper svg g:focus,
+.recharts-wrapper svg g:active {
+  outline: none !important;
+  stroke: none !important;
+  box-shadow: none !important;
+}
+
+/* segurança extra — caso algum elemento receba classe de active/focus */
+.recharts-wrapper .recharts-rectangle:focus,
+.recharts-wrapper .recharts-rectangle:active,
+.recharts-wrapper .recharts-surface:focus,
+.recharts-wrapper .recharts-surface:active {
+  outline: none !important;
+  stroke: none !important;
+}
