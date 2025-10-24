@@ -1,6 +1,6 @@
 import style from "./DashContent.module.css";
 import useBaseContext from "../../hooks/userBaseContext";
-import ProductsPieChart from "../DashContente/ProductsPieChart"
+// import ProductsPieChart from "../DashContente/ProductsPieChart"
 
 
 export default function DashContent() {
@@ -14,9 +14,10 @@ export default function DashContent() {
   const totalUnd = base.reduce((count, product) => count + product.quantity, 0);
   // const totalProducts = base.length;
 
-      console.log(base)
+  console.log(base)
 
-  
+
+  const totalProducts = base.length;
 
   return (
     <div className={style.contentDash}>
@@ -24,9 +25,8 @@ export default function DashContent() {
       <div className={style.dashboard}>
         <div className={style.cardContentDash}>
           <h3 className={style.pcardContent}>Variedade de Itens</h3>
-            
-            <ProductsPieChart/>
-            
+
+          <p className={style.cardContentResult}>{totalProducts}</p>
         </div>
         <div className={style.cardContentDash}>
           <h3 className={style.pcardContent}>Total de Itens</h3>
