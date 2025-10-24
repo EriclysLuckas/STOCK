@@ -152,10 +152,10 @@ export default function AddItemForm() {
               disabled={isLoading}
             >
               <option value="">Selecione a Categoria</option>
-              <option value="Categoria1">Categoria 1</option>
-              <option value="Categoria2">Categoria 2</option>
-              <option value="Categoria3">Categoria 3</option>
-              <option value="Categoria4">Categoria 4</option>
+              <option value="Categoria 1">Categoria 1</option>
+              <option value="Categoria 2">Categoria 2</option>
+              <option value="Categoria 3">Categoria 3</option>
+              <option value="Categoria 4">Categoria 4</option>
             </select>
           </div>
         </div>

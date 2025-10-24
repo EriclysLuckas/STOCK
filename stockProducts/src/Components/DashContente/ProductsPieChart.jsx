@@ -1,91 +1,110 @@
 import { useState, useEffect } from "react";
-import { PieChart, Pie, Sector, Tooltip, Cell } from "recharts";
-import useBaseContext from "../../hooks/userBaseContext"; 
-// Função que renderiza o setor ativo com detalhes
-const renderActiveShape = ({
-  cx, cy, midAngle, innerRadius, outerRadius,
-  startAngle, endAngle, fill, payload, percent, value
-}) => {
-  const RADIAN = Math.PI / 180;
-  const sin = Math.sin(-RADIAN * (midAngle ?? 1));
-  const cos = Math.cos(-RADIAN * (midAngle ?? 1));
-  const sx = (cx ?? 0) + ((outerRadius ?? 0) + 10) * cos;
-  const sy = (cy ?? 0) + ((outerRadius ?? 0) + 10) * sin;
-  const mx = (cx ?? 0) + ((outerRadius ?? 0) + 30) * cos;
-  const my = (cy ?? 0) + ((outerRadius ?? 0) + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
-
-  return (
-    <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
-      </text>
-      <Sector
-        cx={cx}
-        cy={cy}
-        innerRadius={innerRadius}
-        outerRadius={outerRadius}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        fill={fill}
-      />
-      <Sector
-        cx={cx}
-        cy={cy}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        innerRadius={(outerRadius ?? 0) + 6}
-        outerRadius={(outerRadius ?? 0) + 10}
-        fill={fill}
-      />
-      <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-      <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">
-        PV {value}
-      </text>
-      <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
-        (Rate {((percent ?? 1) * 100).toFixed(2)}%)
-      </text>
-    </g>
-  );
-};
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell, Legend } from "recharts";
+import useBaseContext from "../../hooks/userBaseContext";
 
 export default function ProductsPieChart() {
-  const { base } = useBaseContext(); // pega os produtos do contexto
+  const { base } = useBaseContext();
   const [chartData, setChartData] = useState([]);
-useEffect(() => {
-  const data = Object.values(
-    base.reduce((acc, p) => {
-      const key = p.category.toLowerCase();
-      if (!acc[key]) acc[key] = { name: p.category, value: 0 };
-      acc[key].value += p.quantity;
-      return acc;
-    }, {})
-  );
-  setChartData(data);
-}, [base]);
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  useEffect(() => {
+    if (!base || base.length === 0) return;
+
+    const data = Object.values(
+      base.reduce((acc, p) => {
+        const key = p.category?.toLowerCase() || "sem categoria";
+        if (!acc[key]) acc[key] = { name: p.category, value: 0 };
+        acc[key].value += p.quantity || 0;
+        return acc;
+      }, {})
+    );
+    setChartData(data);
+  }, [base]);
+
+  const COLORS = ["#151C48", "#3B70A2", "#0065FC", "#174580", "#a4de6c", "#d0ed57", "#ffc658"];
+
+
+  const renderCustomLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const RADIAN = Math.PI / 180;
+
+    const radius = innerRadius + (outerRadius - innerRadius) / 1.5;
+
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="#fff"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="14"
+        fontFamily="Poppins, sans-serif"
+      >
+        {(percent * 100).toFixed(0)}%
+      </text>
+    );
+  };
+
 
   return (
-    <PieChart style={{ width: '50%',Height:"50%", maxWidth: 500, maxHeight: '80vh', aspectRatio: 1 }}>
-      <Pie
-        activeShape={renderActiveShape}
-        data={chartData}
-        cx="50%"
-        cy="50%"
-        innerRadius="60%"
-        outerRadius="80%"
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {chartData.map((entry, index) => (
-          <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Pie>
-      <Tooltip />
-    </PieChart>
+    <ResponsiveContainer width="100%" height={400}
+      style={{
+        outline: "none",
+        border: "none",
+        userSelect: "none",
+      }} >
+      <PieChart  style={{ cursor: 'pointer' }} >
+        <Pie
+          data={chartData}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="45%"
+          outerRadius={115}
+          label={renderCustomLabel}
+          labelLine={false}
+          stroke="#424241"
+
+        >
+          {chartData.map((_, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip contentStyle={{
+          width: "100%",
+          backgroundColor: '#1e293b',
+          borderRadius: '8px',
+          color: '#fff',
+          border: '8px',
+          padding: '8px 12px',
+          fontSize: "10px",
+
+        }}
+
+          itemStyle={{ color: '#fff' }} />
+        <Legend
+          content={({ payload }) => (
+            <div style={{
+              display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap", marginTop: "-70px",
+            }}>
+              {payload.map((entry, index) => (
+                <div key={`legend-${index}`} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  <div style={{ width: 12, height: 12, backgroundColor: entry.color }}></div>
+                  <span style={{ color: "#fff", fontSize: "12px" }}>{entry.value}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        />
+      </PieChart>
+    </ResponsiveContainer>
   );
 }
