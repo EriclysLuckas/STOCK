@@ -6,7 +6,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  background:  rgb(0, 101, 252);
+  background:  #0065FC;
   padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
