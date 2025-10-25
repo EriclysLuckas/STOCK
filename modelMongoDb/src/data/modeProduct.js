@@ -26,3 +26,29 @@ productSchema.index({ name: 1, category: 1 }, { unique: true });
 
 // Exporta o model
 export default mongoose.model("Product", productSchema);
+
+
+
+//Model User
+
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required:true,
+      trim:true,
+      maxLength:100
+    },
+    email: {
+      type: String,
+      required: true,
+      unique:true,
+      maxLength: 256
+    },
+    password: {
+      type: String,
+      require:true
+    },
+  }
+  
+)

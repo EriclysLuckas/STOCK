@@ -5,7 +5,6 @@ import { FaXmark } from "react-icons/fa6"
 export default function ModalDelet({ isOpenModal, onCloseModal, productName, onConfirmDelete }) {
   if (!isOpenModal) return null
 
-  console.log("Modal abriu!") // 👈 Aqui o log funciona corretamente
 
   return (
     <div className={styleModal.sectionModal}>
