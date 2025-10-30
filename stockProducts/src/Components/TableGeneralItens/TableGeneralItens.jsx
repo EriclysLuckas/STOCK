@@ -11,7 +11,7 @@ export default function TableGeneralItens() {
         <tr className={style.TableGeneralItensTRhead}>
           <th scope="col">ID  </th>
           <th scope="col" className={style.name}> Nome</th>
-          <th scope="col">  Em estoque</th>
+          <th scope="col">  Qnt</th>
           <th scope="col"> Categoria</th>
           <th scope="col"> Ações </th>
         </tr>

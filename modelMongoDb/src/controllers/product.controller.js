@@ -34,14 +34,14 @@ export const createOrUpdateProduct = async (req, res) => {
       return res.status(400).json({ error: "Dados inválidos" });
     }
 
-    // normaliza strings
     const nameNormalized = name.trim().toLowerCase();
     const categoryNormalized = category.trim().toLowerCase();
 
-    // procura produto existente
+    // procura produto existente do mesmo usuário
     const existing = await Product.findOne({
       name: { $regex: `^${nameNormalized}$`, $options: "i" },
-      category: { $regex: `^${categoryNormalized}$`, $options: "i" }
+      category: { $regex: `^${categoryNormalized}$`, $options: "i" },
+      user: req.user._id, // <--- adiciona a condição do usuário
     });
 
     if (existing) {
@@ -54,13 +54,14 @@ export const createOrUpdateProduct = async (req, res) => {
       return res.status(200).json(updated);
     }
 
-    // cria novo produto
+    // cria novo produto para o usuário
     const created = await Product.create({
       name: nameNormalized,
       category: categoryNormalized,
       quantity,
       price,
       desc,
+      user: req.user._id, // <--- ID do usuário autenticado
     });
 
     return res.status(201).json(created);

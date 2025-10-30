@@ -59,3 +59,12 @@ export const login = async (req, res) => {
         res.status(500).json({ message: "Erro interno ao efetuar login" });
     }
 };
+
+
+export const getUser = async (req, res) => {
+
+    const users = await User.find()
+    res.json(users)
+   
+
+}

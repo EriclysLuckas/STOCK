@@ -1,4 +1,3 @@
-// src/hooks/useBaseContext.js
 import { useContext } from 'react';
 import { BaseContext } from '../context/baseContext'; 
 
