@@ -1,6 +1,5 @@
 .TableGeneralItens{
   margin-top: 3%;
-  
 }
 
 .name{
@@ -14,4 +13,25 @@
 }
 .tdBtnAll button{
   height: 70%;
+}
+
+@media screen and (max-width: 480px) {
+/* .TableGeneralItens{
+  font-size: 12px;
+} */
+  
+  /* Esconde a coluna ID */
+  .TableGeneralItens th:first-child,
+  .TableGeneralItens td:first-child {
+    display: none;
+  }
+
+  /* Opcional: ajustar largura das outras colunas */
+  .TableGeneralItens td,
+  .TableGeneralItens th {
+    padding: 8px;
+  }
+
+
+  
 }

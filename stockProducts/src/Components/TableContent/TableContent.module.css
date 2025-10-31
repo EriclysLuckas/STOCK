@@ -28,6 +28,7 @@ table th {
 }
 thead tr{
   box-shadow: -1px 5px 30px 0px rgba(22, 22, 22, 0.74);
+  
 
 }
 thead tr th {
@@ -36,8 +37,9 @@ thead tr th {
   padding:2%;
   &:first-child{
     text-align:left;
-
+    
   }
+ 
   }
 
 table tbody tr th {
@@ -65,8 +67,11 @@ table tbody tr td{
       display: flex;
       flex-direction: column;
       row-gap:25px;
+      justify-content: space-around;
 
     }
+ 
+    
     
 }
 @media (width < 480px){
@@ -74,4 +79,9 @@ table tbody tr td{
 
    width: 100%;
   }
+     thead tr th {
+     &:last-child{
+    width: 7ch;
+  }
+    }
 }

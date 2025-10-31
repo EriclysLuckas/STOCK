@@ -59,3 +59,8 @@ p a{
   text-decoration: none;
   color: white;
 }
+@media (width<720px) {
+.navHeader{
+  right: 10%;
+}
+}

@@ -1,7 +1,7 @@
 import style from "./HeaderPage.module.css";
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-
+import {LogoutButton} from "../ButtonLogOut/ButtonLogOut";
 export default function HeaderPage() {
   const navigate = useNavigate()
 
@@ -21,7 +21,8 @@ export default function HeaderPage() {
         <div className={style.navHeader}>
           <p > <Link to="/home" >Inicio</Link></p>
           <p > <Link to="/produtos/all"> Produtos</Link></p>
-          <p > <Link to=""> Despacho</Link></p>
+          <LogoutButton />
+
         </div>
       </div>
     </div>
