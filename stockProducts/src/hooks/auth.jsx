@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://stock-la2f.onrender.com";
 
 export function useAuth() {
   const navigate = useNavigate();

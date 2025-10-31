@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import InjetToken  from "./injetToken";
 
-const BASE_URL = "//localhost:3000/products";
+const BASE_URL = "/https://stock-la2f.onrender.com/products";
 
 export default function useUtils() {
   const { apiFetch } = InjetToken(); 
